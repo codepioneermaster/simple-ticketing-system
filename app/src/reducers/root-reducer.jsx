@@ -12,7 +12,9 @@ function rootReducer(state = initialState, action) {
                 tickets: state.tickets.concat(action.payload)
             });
         case CHANGE_STATUS :
-            return state;
+            return Object.assign({}, state, {
+                tickets: state.tickets.concat(action.payload)
+            });
         default:
             return state;
     }
