@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import uuidv1 from "uuid";
 import {addTicket} from "../actions/index";
+import {STATUS_NEW} from "../constants/status-types";
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -26,9 +27,12 @@ class ConnectedForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+
         const {title} = this.state;
         const id = uuidv1();
-        this.props.addTicket({title, id});
+        const ticket_status = STATUS_NEW; // default status for new tickets
+
+        this.props.addTicket({title, id, ticket_status});
         this.setState({title: ""});
     }
 

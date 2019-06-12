@@ -8,7 +8,7 @@ const mapStateToProps = state => {
 
 const ConnectedTicketList = ({tickets}) => (
     <div>
-        {tickets.map(el => (<Ticket title={el.title}/>))}
+        {tickets.map(el => (<Ticket key={el.id} title={el.title} status={el.ticket_status}/>))}
     </div>
 );
 
