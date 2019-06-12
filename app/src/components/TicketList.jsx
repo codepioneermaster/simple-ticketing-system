@@ -2,9 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import Ticket from "./Ticket";
 
-const mapStateToProps = state => {
-    return {tickets: state.tickets};
-};
+const mapStateToProps = ((state, ownProps) => {
+    return {tickets: state.tickets[ownProps.status]};
+});
 
 const ConnectedTicketList = ({tickets}) => (
     <div>
