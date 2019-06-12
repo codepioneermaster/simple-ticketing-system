@@ -4,8 +4,10 @@ import Form from "./Form";
 
 const App = () => (
     <div>
-        <div className="row">
-            <Form/>
+        <div className="row mb-4">
+            <div className="col-md-12">
+                <Form/>
+            </div>
         </div>
         <div className="row">
             <div className="col-md-3">
