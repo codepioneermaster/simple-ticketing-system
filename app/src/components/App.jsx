@@ -1,0 +1,24 @@
+import React from "react";
+import TicketList from "./TicketList";
+
+const App = () => (
+    <div className="row">
+        <div className="col-md-3">
+            <h2 className="text-center">New</h2>
+            <TicketList/>
+        </div>
+        <div className="col-md-3">
+            <h2 className="text-center">In Progress</h2>
+            <TicketList/>
+        </div>
+        <div className="col-md-3">
+            <h2 className="text-center">In Review</h2>
+            <TicketList/>
+        </div>
+        <div className="col-md-3">
+            <h2 className="text-center">Done</h2>
+            <TicketList/>
+        </div>
+    </div>
+);
+export default App;
