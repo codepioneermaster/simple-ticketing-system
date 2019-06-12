@@ -9,6 +9,7 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
     chunkFilename: "[id].css"
 });
 module.exports = {
+    mode: 'development',
     module: {
         rules: [
             {
@@ -33,5 +34,9 @@ module.exports = {
     plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
     resolve: {
         extensions: ['.js', '.jsx'],
+    },
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
     }
 };

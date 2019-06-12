@@ -1,8 +1,12 @@
 import React from 'react';
+import Button from './Button';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const title = 'hello world';
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +22,7 @@ function App() {
         >
           Learn React
         </a>
+        <Button title={title}/>
       </header>
     </div>
   );
