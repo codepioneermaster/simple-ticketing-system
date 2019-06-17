@@ -1,0 +1,13 @@
+{
+    "name": "simple_ticketing_system_backend",
+    "version": "0.0.1",
+    "description": "Back-end for simple ticketing system",
+    "author": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1"
+    }
+}
