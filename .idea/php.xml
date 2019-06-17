@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="PhpCodeSniffer">
-    <phpcs_settings>
-      <PhpCSConfiguration max_messages_per_file="99" standards="MySource;PEAR;PSR1;PSR2;Squiz;Zend;wpcs" tool_path="$USER_HOME$/.config/composer/vendor/squizlabs/php_codesniffer/bin/phpcs" timeout="30000" />
-    </phpcs_settings>
-  </component>
-</project>
