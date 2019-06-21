@@ -1,7 +1,13 @@
 const express = require('express');
+// const Tasks = require('routes/tasks');
+import Tasks from 'routes/tasks';
+
 const app = express();
 const port = 3000;
+//
+const tasksRoutes = new Tasks(app);
+tasksRoutes.initRoutes();
 
-app.get('/', (req, res) => res.send('Hello World!'));
+// clear
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`App listening on port ${port}!`));
