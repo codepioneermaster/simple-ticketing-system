@@ -32,4 +32,8 @@
 /back/yarn-debug.log*
 /back/yarn-error.log*
 
+# Docker-related stuff
+/storage/mysql-data/*
+!/storage/mysql-data/.gitkeep
+
 .idea/
