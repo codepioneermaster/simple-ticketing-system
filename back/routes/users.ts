@@ -20,5 +20,9 @@ export class Users implements Route {
         app.post(Users.ROOT, function (request, response) {
             return UserController.create(request, response);
         });
+
+        app.post(Users.ROOT + '/:userId', function (request, response) {
+            return UserController.update(request, response);
+        });
     }
 }

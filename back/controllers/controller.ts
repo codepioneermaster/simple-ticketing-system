@@ -3,5 +3,5 @@ export interface Controller {
 
     create(request: Request, response: Response);
 
-    update();
+    update(request: Request, response: Response);
 }

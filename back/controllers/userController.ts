@@ -20,7 +20,12 @@ export class UserController implements Controller {
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
-    update() {
+    update(request, response) {
+        let updatedInfo = request.query;
+        updatedInfo.id = request.params.userId;
 
+        UserModel.upsert<UserModel>(updatedInfo, {returning: true})
+            .then((isInserted) => response.status(200).json({isInserted}))
+            .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 }
