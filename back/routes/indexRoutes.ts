@@ -2,7 +2,6 @@ import {Tasks} from "./tasks";
 import {Users} from "./users";
 import {Route} from "./route";
 import {UserController} from "../controllers/userController";
-import {UserModel} from "../models/userModel";
 
 export class IndexRoutes {
     routes: Array<Route>;
@@ -10,7 +9,7 @@ export class IndexRoutes {
 
     constructor(app) {
         this.app = app;
-        this.routes = [new Tasks(), new Users(new UserController(UserModel))];
+        this.routes = [new Tasks(), new Users(new UserController())];
     }
 
     init() {
