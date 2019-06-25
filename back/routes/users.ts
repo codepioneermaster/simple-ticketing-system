@@ -1,8 +1,9 @@
 import {Route} from "./route";
 import {Controller} from "../controllers/controller";
-import {UserModel} from "../models/userModel";
 
 export class Users implements Route {
+    static readonly ROOT = '/users';
+
     controller: Controller;
 
     constructor(UserController: Controller) {
@@ -10,8 +11,10 @@ export class Users implements Route {
     }
 
     initRoutes(app: any) {
-        app.get('/users', (req, res) => res.send({
-            message: 'Hello World from users endpoint',
-        }));
+        const UserController = this.controller;
+
+        app.get(Users.ROOT, function (request, response) {
+            return UserController.read(request, response);
+        });
     }
 }

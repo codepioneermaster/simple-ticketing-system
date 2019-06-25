@@ -7,9 +7,16 @@ export class UserController implements Controller {
         this.userModel = model;
     }
 
-    getUsers() {
+    read(request, response) {
+        this.userModel.findAll({attributes: ['id', 'name']})
+            .then((users) => response.status(200).json({users}))
+            .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
-    createUser() {
+    create() {
+    }
+
+    update() {
+
     }
 }
