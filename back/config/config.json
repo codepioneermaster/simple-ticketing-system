@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "sts_user",
-    "password": "7890jdgtds43h",
-    "database": "sts",
+    "password": "KtaY7ABWxbjL2Zt9",
+    "database": "sts_db",
     "host": "database",
     "dialect": "mysql"
   },
