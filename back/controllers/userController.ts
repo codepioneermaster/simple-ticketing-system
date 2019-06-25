@@ -1,4 +1,5 @@
 import {Controller} from "./controller";
+import {UserModel} from "./../models/userModel";
 
 export class UserController implements Controller {
     userModel: any;
@@ -13,7 +14,10 @@ export class UserController implements Controller {
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
-    create() {
+    create(request, response) {
+        UserModel.create<UserModel>(request.query)
+            .then((user) => response.status(200).json({user}))
+            .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
     update() {

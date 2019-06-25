@@ -16,5 +16,9 @@ export class Users implements Route {
         app.get(Users.ROOT, function (request, response) {
             return UserController.read(request, response);
         });
+
+        app.post(Users.ROOT, function (request, response) {
+            return UserController.create(request, response);
+        });
     }
 }
