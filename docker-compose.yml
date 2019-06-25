@@ -1,24 +1,37 @@
 version: "3.3"
 services:
-#  front:
-#    image: "node:10-alpine"
-#    user: "node"
-#    working_dir: /home/node/app
-#    environment:
-#      - NODE_ENV=development
-#    volumes:
-#      - ./front:/home/node/app
-#    ports:
-#      - "8080:8080"
-#    command: [sh, -c, "npm install && npm run start"]
+  database:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=6D48jhssdf743jc
+      - MYSQL_DATABASE=sts
+      - MYSQL_USER=sts_user
+      - MYSQL_PASSWORD=7890jdgtds43h
+    ports:
+      - "3312:3306"
+    volumes:
+      - ./storage/mysql-data:/var/lib/mysql
+  #  front:
+  #    image: "node:10-alpine"
+  #    user: "node"
+  #    working_dir: /home/node/app
+  #    environment:
+  #      - NODE_ENV=development
+  #    volumes:
+  #      - ./front:/home/node/app
+  #    ports:
+  #      - "8080:8080"
+  #    command: [sh, -c, "npm install && npm run start"]
   back:
     image: "node:10-alpine"
     user: "node"
     working_dir: /home/node/app
+    links:
+      - database
     environment:
       - NODE_ENV=development
     volumes:
       - ./back:/home/node/app
     ports:
       - "3000:3000"
-    command: [sh, -c, "npm install && npm start"]
+    command: [sh, -c, "npm install && npm run start"]

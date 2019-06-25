@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "module": "commonjs"
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es6",
+    "resolveJsonModule": true
   }
 }
