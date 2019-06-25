@@ -1,12 +1,12 @@
 import {Table, Column, PrimaryKey, AutoIncrement, Model, CreatedAt, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
 import {Priorities} from "./enums/priorities";
 import {Statuses} from "./enums/statuses";
-import {User} from "./user";
+import {UserModel} from "./userModel";
 
 @Table({
     tableName: 'Task'
 })
-export class Task extends Model<Task> {
+export class TaskModel extends Model<TaskModel> {
 
     @PrimaryKey
     @AutoIncrement
@@ -31,10 +31,10 @@ export class Task extends Model<Task> {
     @UpdatedAt
     updatedAt: Date;
 
-    @ForeignKey(() => User)
+    @ForeignKey(() => UserModel)
     @Column
     assignee: number;
 
-    @BelongsTo(() => User)
+    @BelongsTo(() => UserModel)
     user;
 }

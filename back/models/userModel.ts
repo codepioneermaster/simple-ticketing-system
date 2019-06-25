@@ -3,7 +3,7 @@ import {Table, Column, PrimaryKey, AutoIncrement, Model, CreatedAt, UpdatedAt} f
 @Table({
   tableName: 'User'
 })
-export class User extends Model<User> {
+export class UserModel extends Model<UserModel> {
 
   @PrimaryKey
   @AutoIncrement

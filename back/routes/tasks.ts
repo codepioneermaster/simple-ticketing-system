@@ -1,6 +1,6 @@
 import {Route} from "./route";
-import {Task} from "./../models/task";
-import {User} from "./../models/user";
+import {TaskModel} from "./../models/taskModel";
+import {UserModel} from "./../models/userModel";
 
 export class Tasks implements Route {
     initRoutes(app: any) {
