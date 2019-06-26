@@ -24,3 +24,14 @@ services:
     ports:
       - "3000:3000"
     command: [sh, -c, "npm install && npx sequelize-cli db:migrate && npm run start"]
+  front:
+    image: "node:10-alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./front:/home/node/app
+    ports:
+      - "8080:8080"
+    command: [sh, -c, "npm install && npm run start"]

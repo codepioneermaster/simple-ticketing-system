@@ -2,7 +2,9 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
     template: './public/index.html',
-    filename: './index.html'
+    filename: './index.html',
+    favicon: './public/favicon.ico',
+    manifest: './public/manifest.json'
 });
 const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: "[name].css",
