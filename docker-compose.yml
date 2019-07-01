@@ -2,6 +2,8 @@ version: "3.3"
 services:
   database:
     image: mysql:5.7
+    networks:
+      - sts_backend
     environment:
       - MYSQL_ROOT_PASSWORD=6D2bfmws4bYaJ5Kc
       - MYSQL_DATABASE=sts_db
@@ -15,6 +17,9 @@ services:
     image: "node:10-alpine"
     user: "node"
     working_dir: /home/node/app
+    networks:
+      - sts_frontend
+      - sts_backend
     depends_on:
       - database
     links:
@@ -30,6 +35,12 @@ services:
     image: "node:10-alpine"
     user: "node"
     working_dir: /home/node/app
+    depends_on:
+      - back
+    links:
+      - back
+    networks:
+      - sts_frontend
     environment:
       - NODE_ENV=development
     volumes:
@@ -37,3 +48,7 @@ services:
     ports:
       - "8080:8080"
     command: [sh, -c, "npm install && npm run start"]
+networks:
+  sts_frontend:
+    driver: bridge
+  sts_backend:
