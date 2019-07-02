@@ -34,7 +34,7 @@ class ConnectedTicket extends Component {
         return (
             <div className="card mb-2 border-dark" key={this.props.key}>
                 <div className="card-body">
-                    <h5 className="card-title">{this.props.title}</h5>
+                    <h5 className="card-title">{this.props.summary}</h5>
 
                     <select value={this.props.status} onChange={this.handleChange}>
                         {Object.keys(STATUSES_LIST).map((status, i) => (

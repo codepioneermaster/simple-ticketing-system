@@ -27,7 +27,10 @@ function rootReducer(state = initialState, action) {
                 }
             });
         case LOAD_TICKETS :
-            console.log(action.payload);
+            let newState = Object.assign({}, state);
+            newState.tickets[action.payload.status] = state.tickets[action.payload.status].concat(action.payload.tickets);
+
+            console.log(newState);
             return state;
         case CHANGE_STATUS :
             let newStatus = action.payload.ticket_status;

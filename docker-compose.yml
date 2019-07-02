@@ -17,6 +17,7 @@ services:
     image: "node:10-alpine"
     user: "node"
     working_dir: /home/node/app
+    restart: always
     networks:
       - sts_frontend
       - sts_backend
