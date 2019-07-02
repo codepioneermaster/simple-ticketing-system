@@ -1,27 +1,33 @@
 import React, {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import Ticket from "./Ticket";
+import {loadTickets} from "../actions";
 
-const mapStateToProps = ((state, ownProps) => {
-    return {tickets: state.tickets[ownProps.status]};
+const mapDispatchToProps = ((dispatch) => {
+    return {
+        loadTickets: (tickets, status) => dispatch(loadTickets({tickets: tickets, status: status}))
+    };
 });
 
-const ConnectedTicketList = ({tickets}) => {
-    const [tasks, setData] = useState({ tasks: [] });
+const mapStateToProps = ((state, ownProps) => {
+    return {tickets: state.tickets[ownProps.status], status: ownProps.status};
+});
 
+const ConnectedTicketList = ({tickets, status}) => {
+    const [requestedTickets, setData] = useState({ tickets: [] });
     useEffect(() => {
-        const fetchTasks = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/tasks', {
+        const fetchTickets = async () => {
+            const fetchResult = await fetch('http://0.0.0.0:3000/tasks' + '?status=' + status, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}
             });
-            const tasks = await fetchResult.json();
-            console.log(tasks);
-            setData(tasks);
+            const requestedTickets = await fetchResult.json();
+            console.log(requestedTickets);
+            setData(requestedTickets);
         };
 
-        fetchTasks();
+        fetchTickets();
     }, []);
 
     return (<div>

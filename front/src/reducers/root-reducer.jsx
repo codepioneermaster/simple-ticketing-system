@@ -1,4 +1,4 @@
-import {ADD_TICKET} from "../constants/action-types";
+import {ADD_TICKET, LOAD_TICKETS} from "../constants/action-types";
 import {CHANGE_STATUS} from "../constants/action-types";
 
 import {STATUS_NEW} from "../constants/status-types";
@@ -26,6 +26,9 @@ function rootReducer(state = initialState, action) {
                     [STATUS_DONE]: state.tickets[STATUS_DONE],
                 }
             });
+        case LOAD_TICKETS :
+            console.log(action.payload);
+            return state;
         case CHANGE_STATUS :
             let newStatus = action.payload.ticket_status;
 

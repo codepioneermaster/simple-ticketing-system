@@ -4,7 +4,7 @@ import {UserModel} from "../models/userModel";
 
 export class TaskController implements Controller {
     read(request, response) {
-        TaskModel.findAll({attributes: ['id', 'summary', 'description', 'priority', 'status'], include: [UserModel]})
+        TaskModel.findAll({where: {status: request.query.status}, attributes: ['id', 'summary', 'description', 'priority', 'status'], include: [UserModel]})
             .then((tasks) => response.status(200).header('Content-Type', 'application/json').json({tasks}))
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }
