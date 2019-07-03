@@ -26,8 +26,7 @@ const TicketList = ({status}) => {
 
     return (<div>
         {tickets.map(ticket => {
-            let ticketInfo = {key: ticket.id, summary: ticket.summary, status: ticket.status};
-            return (<Ticket {...ticketInfo}/>)
+            return (<Ticket key={ticket.id} {...ticket}/>)
         })}
     </div>);
 };

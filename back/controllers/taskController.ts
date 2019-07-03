@@ -15,14 +15,13 @@ export class TaskController implements Controller {
     }
 
     create(request, response) {
-        console.log(request.body);
         TaskModel.create<TaskModel>(request.body)
             .then((task) => response.status(200).json({task}))
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
     update(request, response) {
-        let updatedInfo = request.query;
+        let updatedInfo = request.body;
         updatedInfo.id = request.params.taskId;
 
         TaskModel.upsert<TaskModel>(updatedInfo, {returning: true})

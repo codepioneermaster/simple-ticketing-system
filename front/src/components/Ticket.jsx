@@ -1,23 +1,46 @@
-import React from "react";
-import {changeStatus} from "../actions";
+import React, {useState} from "react";
 import {STATUSES_LIST} from "../constants/status-types";
 
 const Ticket = (ticket) => {
-        return (
-            <div className="card mb-2 border-dark">
-                <div className="card-body">
-                    <h5 className="card-title">{ticket.summary}</h5>
 
-                    <select value={ticket.status} onChange={changeStatus}>
-                        {STATUSES_LIST.map((status) => (
-                            <option key={status} value={status}>
-                                {status}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+    const [status, setStatus] = useState(ticket.status);
+
+    const changeStatus = (event) => {
+        let newStatus = event.target.value;
+        let ticketToUpdate = {status: newStatus};
+        setStatus(newStatus);
+
+        const updateTicket = async (ticketToUpdate) => {
+            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + ticket.id, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(ticketToUpdate)
+            });
+
+            return await fetchResponse.json();
+        };
+
+        updateTicket(ticketToUpdate).then((ticket) => {
+            console.log(ticket);
+            // dispatch({type: ADD_TICKET, payload: {...ticket}});
+        }).catch(reason => console.log(reason.message));
+    };
+
+    return (
+        <div className="card mb-2 border-dark" key={ticket.id}>
+            <div className="card-body">
+                <h5 className="card-title">{ticket.summary}</h5>
+                <select value={status} onChange={changeStatus}>
+                    {STATUSES_LIST.map((status) => (
+                        <option key={status} value={status}>
+                            {status}
+                        </option>
+                    ))}
+                </select>
             </div>
-        )
+        </div>
+    )
 };
 
 export default Ticket;
