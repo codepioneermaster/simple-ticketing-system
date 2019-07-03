@@ -1,6 +1,6 @@
 import React from "react";
 import TicketList from "./TicketList";
-import Form from "./Form";
+import AddTicketForm from "./AddTicketForm";
 
 import {STATUS_NEW} from "../constants/status-types";
 import {STATUS_PROGRESS} from "../constants/status-types";
@@ -11,7 +11,7 @@ const App = () => (
     <div>
         <div className="row mb-4">
             <div className="col-md-12">
-                <Form/>
+                <AddTicketForm/>
             </div>
         </div>
         <div className="row">
