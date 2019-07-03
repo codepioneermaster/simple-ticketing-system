@@ -10,7 +10,7 @@ export class TaskController implements Controller {
     }
 
     create(request, response) {
-        TaskModel.create<TaskModel>(request.query)
+        TaskModel.create<TaskModel>(request.body)
             .then((task) => response.status(200).json({task}))
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }

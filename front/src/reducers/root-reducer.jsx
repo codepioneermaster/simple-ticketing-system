@@ -20,7 +20,7 @@ function rootReducer(state = initialState, action) {
         case ADD_TICKET :
             return Object.assign({}, state, {
                 tickets: {
-                    [STATUS_NEW]: state.tickets[STATUS_NEW].concat(action.payload),
+                    [STATUS_NEW]: state.tickets[STATUS_NEW].concat(action.payload.task),
                     [STATUS_PROGRESS]: state.tickets[STATUS_PROGRESS],
                     [STATUS_REVIEW]: state.tickets[STATUS_REVIEW],
                     [STATUS_DONE]: state.tickets[STATUS_DONE],

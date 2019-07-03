@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {STATUS_NEW} from "../constants/status-types";
 import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
 import {useDispatch} from "react-redux";
-import {LOAD_TICKETS} from "../constants/action-types";
+import {ADD_TICKET} from "../constants/action-types";
 
 const AddTicketForm = () => {
     const [summary, setSummary] = useState('');
@@ -10,10 +10,41 @@ const AddTicketForm = () => {
     const [priority, setPriority] = useState(PRIORITY_NEW);
     const [assignee, setAssignee] = useState('');
     const [users, setUsers] = useState([]);
+    const dispatch = useDispatch();
+
+    const clearState = () => {
+        setSummary('');
+        setDescription('');
+        setPriority(PRIORITY_NEW);
+        setAssignee('');
+    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(summary);
+
+        const newTicket = {
+            summary: summary,
+            description: description,
+            priority: priority,
+            status: STATUS_NEW,
+            assignee: assignee
+        };
+
+        const saveTicket = async (ticket) => {
+            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks', {
+                method: 'POST',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(ticket)
+            });
+
+            return await fetchResponse.json();
+        };
+
+        saveTicket(newTicket).then((ticket) => {
+            dispatch({type: ADD_TICKET, payload: {...ticket}});
+            clearState();
+        }).catch(reason => console.log(reason.message));
     };
 
     useEffect(() => {
@@ -58,7 +89,7 @@ const AddTicketForm = () => {
 
                 <div className="form-group">
                     <label htmlFor="priority">Priority</label>
-                    <select value={priority} onChange={setPriority} id="priority">
+                    <select value={priority} onChange={(event) => setPriority(event.target.value)} id="priority">
                         {PRIORITIES_LIST.map((priority) => (
                             <option key={priority} value={priority}>
                                 {priority}
@@ -69,7 +100,7 @@ const AddTicketForm = () => {
 
                 <div className="form-group">
                     <label htmlFor="assignee">Assignee</label>
-                    <select value={assignee} onChange={setAssignee} id="assignee">
+                    <select value={assignee} onChange={(event) => setAssignee(event.target.value)} id="assignee">
                         {users.map((user) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
