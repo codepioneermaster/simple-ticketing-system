@@ -16,7 +16,7 @@ const AddTicketForm = () => {
         setSummary('');
         setDescription('');
         setPriority(PRIORITY_NEW);
-        setAssignee('');
+        setAssignee(null);
     };
 
     const handleSubmit = (event) => {
@@ -27,7 +27,7 @@ const AddTicketForm = () => {
             description: description,
             priority: priority,
             status: STATUS_NEW,
-            assignee: assignee
+            assignee: assignee ? assignee : null
         };
 
         const saveTicket = async (ticket) => {
@@ -101,6 +101,9 @@ const AddTicketForm = () => {
                 <div className="form-group">
                     <label htmlFor="assignee">Assignee</label>
                     <select value={assignee} onChange={(event) => setAssignee(event.target.value)} id="assignee">
+                        <option value={null}>
+                            Select user
+                        </option>
                         {users.map((user) => (
                             <option key={user.id} value={user.id}>
                                 {user.name}
