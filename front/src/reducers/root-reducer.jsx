@@ -30,20 +30,14 @@ function rootReducer(state = initialState, action) {
             let newState = Object.assign({}, state);
             newState.tickets[action.payload.status] = state.tickets[action.payload.status].concat(action.payload.tickets);
 
-            return state;
+            return newState;
         case CHANGE_STATUS :
-            // let newStatus = action.payload.ticket_status;
-            //
-            // let mergedTickets = Object.assign({}, state.tickets, {
-            //     [newStatus]: state.tickets[newStatus].concat(action.payload)
-            // });
-            //
-            // return Object.assign({}, state, {
-            //     tickets: mergedTickets
-            // });
+            let changeStatusState = Object.assign({}, state);
 
-            console.log(action.payload);
-            return state;
+            changeStatusState.tickets[action.payload.ticket.status] = changeStatusState.tickets[action.payload.ticket.status].concat(action.payload.ticket);
+            changeStatusState.tickets[action.payload.prevStatus] = changeStatusState.tickets[action.payload.prevStatus].filter(ticket => ticket.id !== action.payload.ticket.id);
+
+            return changeStatusState;
         default:
             return state;
     }
