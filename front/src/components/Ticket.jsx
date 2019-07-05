@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {STATUS_DONE, STATUS_NEW, STATUS_PROGRESS, STATUS_REVIEW, STATUSES_LIST} from "../constants/status-types";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {STATUSES_LIST} from "../constants/status-types";
 import {useDispatch, useSelector} from "react-redux";
 import {CHANGE_STATUS} from "../constants/action-types";
 
@@ -30,18 +31,23 @@ const Ticket = (ticket) => {
     };
 
     return (
-        <div className="card mb-2 border-dark" key={ticket.id}>
-            <div className="card-body">
-                <h5 className="card-title">{ticket.summary}</h5>
-                <select value={status} onChange={(event) => {changeStatus(event.target.value); setStatus(event.target.value)}}>
-                    {STATUSES_LIST.map((status) => (
-                        <option key={status} value={status}>
-                            {status}
-                        </option>
-                    ))}
-                </select>
-            </div>
-        </div>
+            <Link to="/ticket">
+                <div className="card mb-2 border-dark" key={ticket.id}>
+                    <div className="card-body">
+                        <h5 className="card-title">{ticket.summary}</h5>
+                        <select value={status} onChange={(event) => {
+                            changeStatus(event.target.value);
+                            setStatus(event.target.value)
+                        }}>
+                            {STATUSES_LIST.map((status) => (
+                                <option key={status} value={status}>
+                                    {status}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+            </Link>
     )
 };
 
