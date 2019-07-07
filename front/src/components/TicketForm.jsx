@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 import {STATUS_NEW} from "../constants/status-types";
 import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
@@ -13,14 +13,8 @@ const TicketForm = () => {
     const [priority, setPriority] = useState(PRIORITY_NEW);
     const [assignee, setAssignee] = useState('');
     const [users, setUsers] = useState([]);
+    const [id, setTicketId] = useState('');
     const dispatch = useDispatch();
-
-    const clearState = () => {
-        setSummary('');
-        setDescription('');
-        setPriority(PRIORITY_NEW);
-        setAssignee(null);
-    };
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -44,14 +38,12 @@ const TicketForm = () => {
             return await fetchResponse.json();
         };
 
-        saveTicket(newTicket).then((ticket) => {
-            dispatch({type: ADD_TICKET, payload: {...ticket}});
-            clearState();
-        }).catch(reason => console.log(reason.message));
-    };
-
-    const handleCancel = () => {
-        return <Redirect to="/"/>
+        saveTicket(newTicket)
+            .then((ticket) => {
+                setTicketId(ticket.task.id);
+                dispatch({type: ADD_TICKET, payload: {...ticket}});
+            })
+            .catch(reason => console.log(reason.message));
     };
 
     useEffect(() => {
@@ -68,6 +60,10 @@ const TicketForm = () => {
         fetchAvailableUsers();
     }, []);
 
+
+    if (id) {
+        return (<Redirect to="/"/>)
+    }
 
     return (
         <form onSubmit={handleSubmit}>
