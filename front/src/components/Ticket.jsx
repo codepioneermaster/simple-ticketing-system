@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {STATUSES_LIST} from "../constants/status-types";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {CHANGE_STATUS} from "../constants/action-types";
 
 const Ticket = (ticket) => {

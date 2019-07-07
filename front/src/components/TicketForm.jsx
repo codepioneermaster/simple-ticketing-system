@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
+
 import {STATUS_NEW} from "../constants/status-types";
 import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
-import {useDispatch} from "react-redux";
+
 import {ADD_TICKET} from "../constants/action-types";
 
 const TicketForm = () => {
@@ -45,6 +48,10 @@ const TicketForm = () => {
             dispatch({type: ADD_TICKET, payload: {...ticket}});
             clearState();
         }).catch(reason => console.log(reason.message));
+    };
+
+    const handleCancel = () => {
+        return <Redirect to="/"/>
     };
 
     useEffect(() => {
@@ -110,8 +117,9 @@ const TicketForm = () => {
                 </select>
             </div>
             <button type="submit" className="btn btn-success btn-lg">
-                SAVE
+                Save
             </button>
+            <Link to="/" className="btn btn-secondary btn-lg ml-4">Cancel</Link>
         </form>
     )
 };
