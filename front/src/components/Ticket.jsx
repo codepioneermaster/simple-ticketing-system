@@ -31,7 +31,7 @@ const Ticket = (ticket) => {
     };
 
     return (
-            <Link to="/ticket">
+            <Link to={`/ticket/${ticket.id}`}>
                 <div className="card mb-2 border-dark" key={ticket.id}>
                     <div className="card-body">
                         <h5 className="card-title">{ticket.summary}</h5>

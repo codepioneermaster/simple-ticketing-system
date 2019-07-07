@@ -1,7 +1,7 @@
 import React from "react";
+import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 import TicketList from "./TicketList";
-import AddTicketForm from "./AddTicketForm";
 
 import {STATUS_NEW} from "../constants/status-types";
 import {STATUS_PROGRESS} from "../constants/status-types";
@@ -10,9 +10,12 @@ import {STATUS_DONE} from "../constants/status-types";
 
 const Board = () => (
     <div>
-        <div className="row mb-4">
+        <div className="row mb-4 mt-4">
+            <div className="col-md-12 mb-4">
+                <Link to="/ticket" className="btn btn-primary btn-lg">Add Ticket</Link>
+            </div>
             <div className="col-md-12">
-                <AddTicketForm/>
+                <Link to="/user" className="btn btn-secondary btn-lgg">Add User</Link>
             </div>
         </div>
         <div className="row">
