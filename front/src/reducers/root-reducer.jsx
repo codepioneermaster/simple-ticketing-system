@@ -19,7 +19,7 @@ function rootReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TICKET :
             let addedTicket = {
-                [action.payload.task.id] : action.payload.task
+                [action.payload.task.id]: action.payload.task
             };
 
             return Object.assign({}, state, {
@@ -44,8 +44,8 @@ function rootReducer(state = initialState, action) {
         case CHANGE_STATUS :
             let changeStatusState = Object.assign({}, state);
 
-            changeStatusState.tickets[action.payload.ticket.status] = changeStatusState.tickets[action.payload.ticket.status].concat(action.payload.ticket);
-            changeStatusState.tickets[action.payload.prevStatus] = changeStatusState.tickets[action.payload.prevStatus].filter(ticket => ticket.id !== action.payload.ticket.id);
+            changeStatusState.tickets[action.payload.ticket.status] = Object.assign({}, changeStatusState.tickets[action.payload.ticket.status], {[action.payload.ticket.id]: action.payload.ticket});
+            delete changeStatusState.tickets[action.payload.prevStatus][action.payload.ticket.id];
 
             return changeStatusState;
         default:

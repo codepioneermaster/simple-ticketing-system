@@ -31,23 +31,23 @@ const Ticket = (ticket) => {
     };
 
     return (
-            <Link to={`/ticket/${ticket.id}`}>
-                <div className="card mb-2 border-dark" key={ticket.id}>
-                    <div className="card-body">
-                        <h5 className="card-title">{ticket.summary}</h5>
-                        <select value={status} onChange={(event) => {
-                            changeStatus(event.target.value);
-                            setStatus(event.target.value)
-                        }}>
-                            {STATUSES_LIST.map((status) => (
-                                <option key={status} value={status}>
-                                    {status}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                </div>
-            </Link>
+        <div className="card mb-2 border-dark" key={ticket.id}>
+            <div className="card-body">
+                <Link to={`/ticket/${ticket.id}`}>
+                    <h5 className="card-title">{ticket.summary}</h5>
+                </Link>
+                <select value={status} onChange={(event) => {
+                    changeStatus(event.target.value);
+                    setStatus(event.target.value)
+                }}>
+                    {STATUSES_LIST.map((status) => (
+                        <option key={status} value={status}>
+                            {status}
+                        </option>
+                    ))}
+                </select>
+            </div>
+        </div>
     )
 };
 
