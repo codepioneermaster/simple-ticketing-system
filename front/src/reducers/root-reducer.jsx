@@ -18,9 +18,13 @@ const initialState = {
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TICKET :
+            let addedTicket = {
+                [action.payload.task.id] : action.payload.task
+            };
+
             return Object.assign({}, state, {
                 tickets: {
-                    [STATUS_NEW]: state.tickets[STATUS_NEW].concat(action.payload.task),
+                    [STATUS_NEW]: Object.assign({}, state.tickets[STATUS_NEW], addedTicket),
                     [STATUS_PROGRESS]: state.tickets[STATUS_PROGRESS],
                     [STATUS_REVIEW]: state.tickets[STATUS_REVIEW],
                     [STATUS_DONE]: state.tickets[STATUS_DONE],
