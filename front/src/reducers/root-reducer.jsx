@@ -8,10 +8,10 @@ import {STATUS_DONE} from "../constants/status-types";
 
 const initialState = {
     tickets: {
-        [STATUS_NEW]: [],
-        [STATUS_PROGRESS]: [],
-        [STATUS_REVIEW]: [],
-        [STATUS_DONE]: [],
+        [STATUS_NEW]: {},
+        [STATUS_PROGRESS]: {},
+        [STATUS_REVIEW]: {},
+        [STATUS_DONE]: {},
     }
 };
 
@@ -28,7 +28,13 @@ function rootReducer(state = initialState, action) {
             });
         case LOAD_TICKETS :
             let newState = Object.assign({}, state);
-            newState.tickets[action.payload.status] = state.tickets[action.payload.status].concat(action.payload.tickets);
+
+            let newTickets = action.payload.tickets.reduce((obj, item) => {
+                obj[item.id] = item
+                return obj
+            }, {});
+
+            newState.tickets[action.payload.status] = Object.assign({}, state.tickets[action.payload.status], newTickets);
 
             return newState;
         case CHANGE_STATUS :

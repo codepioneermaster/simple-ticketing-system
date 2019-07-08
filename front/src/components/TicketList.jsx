@@ -25,7 +25,7 @@ const TicketList = ({status}) => {
     const tickets = useSelector(state => state.tickets[status]);
 
     return (<div>
-        {tickets.map(ticket => {
+        {Object.values(tickets).map(ticket => {
             return (<Ticket key={ticket.id} {...ticket}/>)
         })}
     </div>);
