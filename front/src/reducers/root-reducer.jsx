@@ -45,7 +45,9 @@ function rootReducer(state = initialState, action) {
             let changeStatusState = Object.assign({}, state);
 
             changeStatusState.tickets[action.payload.ticket.status] = Object.assign({}, changeStatusState.tickets[action.payload.ticket.status], {[action.payload.ticket.id]: action.payload.ticket});
+
             delete changeStatusState.tickets[action.payload.prevStatus][action.payload.ticket.id];
+            changeStatusState.tickets[action.payload.prevStatus] = Object.assign({}, changeStatusState.tickets[action.payload.prevStatus]);
 
             return changeStatusState;
         default:
