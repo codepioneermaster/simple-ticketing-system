@@ -10,6 +10,8 @@ const miniCssExtractPlugin = new MiniCssExtractPlugin({
     filename: "[name].css",
     chunkFilename: "[id].css"
 });
+const ASSET_PATH = process.env.ASSET_PATH || '/';
+
 module.exports = {
     mode: 'development',
     module: {
@@ -43,5 +45,8 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true
+    },
+    output: {
+        publicPath: ASSET_PATH
     }
 };
