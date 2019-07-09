@@ -14,6 +14,12 @@ export class TaskController implements Controller {
             .catch(err => response.status(500).json({err: ['oops', err]}));
     }
 
+    readById(request, response) {
+        TaskModel.findByPk(request.params.id, {attributes: ['id', 'summary', 'description', 'priority', 'status'], include: [UserModel]})
+            .then((ticket) => response.status(200).header('Content-Type', 'application/json').json(ticket))
+            .catch(err => response.status(500).json({err: ['oops', err]}));
+    }
+
     create(request, response) {
         TaskModel.create<TaskModel>(request.body)
             .then((task) => response.status(200).json({task}))

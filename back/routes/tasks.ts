@@ -17,6 +17,10 @@ export class Tasks implements Route {
             return TaskController.read(request, response);
         });
 
+        app.get(Tasks.ROOT + '/:id', function (request, response) {
+            return TaskController.readById(request, response);
+        });
+
         app.post(Tasks.ROOT, function (request, response) {
             return TaskController.create(request, response);
         });
