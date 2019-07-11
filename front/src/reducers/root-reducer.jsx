@@ -1,4 +1,4 @@
-import {ADD_TICKET, LOAD_TICKETS} from "../constants/action-types";
+import {ADD_TICKET, LOAD_TICKETS, UPDATE_TICKET} from "../constants/action-types";
 import {CHANGE_STATUS} from "../constants/action-types";
 
 import {STATUS_NEW} from "../constants/status-types";

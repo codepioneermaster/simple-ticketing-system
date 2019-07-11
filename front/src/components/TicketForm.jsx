@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
 import {STATUS_NEW, STATUSES_LIST} from "../constants/status-types";
@@ -44,13 +44,7 @@ const TicketForm = (ticket) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        ticket.id ? handleUpdate() : handleCreate();
-    };
 
-    const handleUpdate = () => {
-    };
-
-    const handleCreate = () => {
         const newTicket = {
             summary: summary,
             description: description,
@@ -59,6 +53,30 @@ const TicketForm = (ticket) => {
             assignee: assignee ? assignee : null
         };
 
+        ticket.id ? handleUpdate({...newTicket, id: ticket.id}) : handleCreate(newTicket);
+    };
+
+    const handleUpdate = (updatedTicket) => {
+
+        const updateTicket = async (ticket) => {
+            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + ticket.id, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(ticket)
+            });
+
+            return await fetchResponse.json();
+        };
+
+        updateTicket(updatedTicket)
+            .then(() => {
+                setTicketId(updatedTicket.id);
+            })
+            .catch(reason => console.log(reason.message));
+    };
+
+    const handleCreate = (newTicket) => {
         const saveTicket = async (ticket) => {
             const fetchResponse = await fetch('http://0.0.0.0:3000/tasks', {
                 method: 'POST',
