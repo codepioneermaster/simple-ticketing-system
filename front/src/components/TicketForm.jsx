@@ -22,9 +22,7 @@ const TicketForm = (ticket) => {
         setSummary(ticket.summary);
         setDescription(ticket.description);
         setPriority(ticket.priority);
-        if (ticket.hasOwnProperty('user')) {
-            setAssignee(ticket.user.id);
-        }
+        ticket.hasOwnProperty('user') && setAssignee(ticket.user.id);
         setStatus(ticket.status);
     }, [ticket]);
 
