@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
-import {STATUS_NEW} from "../constants/status-types";
+import {STATUS_NEW, STATUSES_LIST} from "../constants/status-types";
 import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
 
 import {ADD_TICKET} from "../constants/action-types";
@@ -123,6 +123,22 @@ const TicketForm = (ticket) => {
                     ))}
                 </select>
             </div>
+
+            {status ?
+                <div className="form-group">
+                    <label htmlFor="status">Status</label>
+                    <select value={status} onChange={(event) =>
+                        setStatus(event.target.value)
+                    } id="status">
+                        {STATUSES_LIST.map((status) => (
+                            <option key={status} value={status}>
+                                {status}
+                            </option>
+                        ))}
+                    </select>
+                </div> : null}
+
+
             <button type="submit" className="btn btn-success btn-lg">
                 Save
             </button>
