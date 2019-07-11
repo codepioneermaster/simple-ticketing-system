@@ -6,19 +6,18 @@ const EditTicket = (props) => {
     const [requestedTicket, setTicket] = useState({});
 
     useEffect(() => {
-        const fetchTicket = async () => {
+        const fetchTicket = async (ticketId) => {
             const fetchResult = await fetch('http://0.0.0.0:3000/tasks/' + ticketId, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}
             });
-            const ticket = await fetchResult.json();
-
-            setTicket(ticket);
+            return await fetchResult.json();
         };
 
-        fetchTicket();
-    }, []);
+        fetchTicket(ticketId).then(ticket =>
+            setTicket(ticket)).catch(reason => console.log(reason.message));
+    }, [ticketId]);
 
     return (
         <div className="row mt-4">

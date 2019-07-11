@@ -35,11 +35,11 @@ const TicketForm = (ticket) => {
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}
             });
-            const result = await fetchResult.json();
-            setUsers(result.users);
+            return await fetchResult.json();
         };
 
-        fetchAvailableUsers();
+        fetchAvailableUsers().then(result =>
+            setUsers(result.users)).catch(reason => console.log(reason.message));
     }, []);
 
     const handleSubmit = (event) => {
