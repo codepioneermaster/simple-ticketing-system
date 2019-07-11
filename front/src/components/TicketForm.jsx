@@ -28,13 +28,29 @@ const TicketForm = (ticket) => {
         setStatus(ticket.status);
     }, [ticket]);
 
-    if (id) {
-        return (<Redirect to="/"/>)
-    }
+    useEffect(() => {
+        const fetchAvailableUsers = async () => {
+            const fetchResult = await fetch('http://0.0.0.0:3000/users', {
+                method: 'GET',
+                mode: 'cors',
+                headers: {'Content-Type': 'application/json'}
+            });
+            const result = await fetchResult.json();
+            setUsers(result.users);
+        };
+
+        fetchAvailableUsers();
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        ticket.id ? handleUpdate() : handleCreate();
+    };
 
+    const handleUpdate = () => {
+    };
+
+    const handleCreate = () => {
         const newTicket = {
             summary: summary,
             description: description,
@@ -62,19 +78,10 @@ const TicketForm = (ticket) => {
             .catch(reason => console.log(reason.message));
     };
 
-    useEffect(() => {
-        const fetchAvailableUsers = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/users', {
-                method: 'GET',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'}
-            });
-            const result = await fetchResult.json();
-            setUsers(result.users);
-        };
-
-        fetchAvailableUsers();
-    }, []);
+    // Redirect after ticket create/update
+    if (id) {
+        return (<Redirect to="/"/>)
+    }
 
     return (
         <form onSubmit={handleSubmit}>
