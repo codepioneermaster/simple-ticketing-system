@@ -39,18 +39,25 @@ function rootReducer(state = initialState, action) {
             return newState;
         case CHANGE_STATUS :
             let changeStatusState = Object.assign({}, state);
+            let ticket = Object.assign(
+                {},
+                changeStatusState[action.payload.prevStatus][action.payload.ticketid],
+                {status: action.payload.status}
+            );
 
-            changeStatusState.tickets[action.payload.ticket.status] = Object.assign({}, changeStatusState.tickets[action.payload.ticket.status], {[action.payload.ticket.id]: action.payload.ticket});
+            changeStatusState.tickets[action.payload.status] = Object.assign(
+                {},
+                changeStatusState.tickets[action.payload.status],
+                {[ticket.id]: ticket}
+            );
 
-            delete changeStatusState.tickets[action.payload.prevStatus][action.payload.ticket.id];
+            delete changeStatusState.tickets[action.payload.prevStatus][ticket.id];
             changeStatusState.tickets[action.payload.prevStatus] = Object.assign({}, changeStatusState.tickets[action.payload.prevStatus]);
 
             return changeStatusState;
         case CHANGE_ASSIGNEE :
             let changeAssigneeState = Object.assign({}, state);
             changeAssigneeState.tickets[action.payload.ticket.status][action.payload.ticket.id].user = action.payload.assignee;
-
-            console.log(changeAssigneeState);
 
             return changeAssigneeState;
         default:

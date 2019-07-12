@@ -27,6 +27,7 @@ const Ticket = (ticket) => {
 
     const changeStatus = (status) => {
         const updateTicket = async (status, id) => {
+            console.log(status);
             const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + id, {
                 method: 'POST',
                 mode: 'cors',
@@ -41,9 +42,7 @@ const Ticket = (ticket) => {
             setStatus(status);
             dispatch({
                 type: CHANGE_STATUS, payload: {
-                    ticket: Object.assign({}, ticket, {
-                        status: status
-                    }), prevStatus: ticket.status
+                    ticket: ticket, status: status, prevStatus: ticket.status
                 }
             });
         }).catch(reason => console.log(reason.message));
@@ -64,7 +63,8 @@ const Ticket = (ticket) => {
         updateTicket(assignee, ticket.id).then((result) => {
             setAssignee(assignee);
             dispatch({
-                type: CHANGE_ASSIGNEE, payload: {ticket: ticket, assignee: users.find((user) => user.id == assignee)}
+                type: CHANGE_ASSIGNEE,
+                payload: {ticket: ticket, assignee: assignee ? users.find((user) => user.id == assignee) : null}
             });
         }).catch(reason => console.log(reason.message));
     };
@@ -97,7 +97,8 @@ const Ticket = (ticket) => {
                             <label htmlFor="assignee">Assignee:</label>
                         </div>
                         <div className="col-md-6">
-                            <select value={assignee} onChange={(event) => changeAssignee(event.target.value)} id="assignee">
+                            <select value={assignee} onChange={(event) => changeAssignee(event.target.value)}
+                                    id="assignee">
                                 <option value="">
                                     Unassigned
                                 </option>
