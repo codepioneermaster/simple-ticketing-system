@@ -22,7 +22,9 @@ const TicketForm = (ticket) => {
         setSummary(ticket.summary);
         setDescription(ticket.description);
         setPriority(ticket.priority);
-        ticket.hasOwnProperty('user') && setAssignee(ticket.user.id);
+        if (ticket.hasOwnProperty('user')) {
+            ticket.user !== null && setAssignee(ticket.user.id);
+        }
         setStatus(ticket.status);
     }, [ticket]);
 
@@ -136,8 +138,8 @@ const TicketForm = (ticket) => {
             <div className="form-group">
                 <label htmlFor="assignee">Assignee</label>
                 <select value={assignee} onChange={(event) => setAssignee(event.target.value)} id="assignee">
-                    <option value={null}>
-                        Select user
+                    <option value="">
+                        Unassigned
                     </option>
                     {users.map((user) => (
                         <option key={user.id} value={user.id}>
