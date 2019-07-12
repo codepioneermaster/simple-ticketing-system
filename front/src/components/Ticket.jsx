@@ -27,7 +27,6 @@ const Ticket = (ticket) => {
 
     const changeStatus = (status) => {
         const updateTicket = async (status, id) => {
-            console.log(status);
             const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + id, {
                 method: 'POST',
                 mode: 'cors',
@@ -60,7 +59,7 @@ const Ticket = (ticket) => {
             return await fetchResponse.json();
         };
 
-        updateTicket(assignee, ticket.id).then((result) => {
+        updateTicket(assignee, ticket.id).then(() => {
             setAssignee(assignee);
             dispatch({
                 type: CHANGE_ASSIGNEE,
