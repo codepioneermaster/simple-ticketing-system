@@ -75,20 +75,20 @@ const Ticket = (ticket) => {
         }).catch(reason => console.log(reason.message));
     };
 
-    const getColorByPriority = (priority) => {
+    const getClassByPriority = (priority) => {
         switch (priority) {
             case PRIORITY_NEW :
-                return '#000000';
+                return 'badge badge-dark';
             case PRIORITY_LOW :
-                return '#166610';
+                return 'badge badge-primary';
             case PRIORITY_MEDIUM :
-                return '#141b99';
+                return 'badge badge-success';
             case PRIORITY_HIGH :
-                return '#991497';
+                return 'badge badge-warning';
             case PRIORITY_BLOCKER :
-                return '#991414';
+                return 'badge badge-danger';
             default :
-                return '#459914';
+                return 'badge badge-dark';
         }
     };
 
@@ -135,7 +135,7 @@ const Ticket = (ticket) => {
                     </div>
                 </div>
 
-                <span style={{color: getColorByPriority(ticket.priority)}}>{ticket.priority}</span>
+                <span className={getClassByPriority(ticket.priority)}>{ticket.priority}</span>
             </div>
         </div>
     )
