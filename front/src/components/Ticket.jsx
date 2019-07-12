@@ -3,6 +3,13 @@ import {Link} from "react-router-dom";
 import {STATUSES_LIST} from "../constants/status-types";
 import {useDispatch} from "react-redux";
 import {CHANGE_ASSIGNEE, CHANGE_STATUS} from "../constants/action-types";
+import {
+    PRIORITY_NEW,
+    PRIORITY_LOW,
+    PRIORITY_MEDIUM,
+    PRIORITY_HIGH,
+    PRIORITY_BLOCKER
+} from "../constants/priority-types";
 
 const Ticket = (ticket) => {
 
@@ -68,6 +75,23 @@ const Ticket = (ticket) => {
         }).catch(reason => console.log(reason.message));
     };
 
+    const getColorByPriority = (priority) => {
+        switch (priority) {
+            case PRIORITY_NEW :
+                return '#000000';
+            case PRIORITY_LOW :
+                return '#166610';
+            case PRIORITY_MEDIUM :
+                return '#141b99';
+            case PRIORITY_HIGH :
+                return '#991497';
+            case PRIORITY_BLOCKER :
+                return '#991414';
+            default :
+                return '#459914';
+        }
+    };
+
     return (
         <div className="card mb-2 border-dark" key={ticket.id}>
             <div className="card-body">
@@ -110,6 +134,8 @@ const Ticket = (ticket) => {
                         </div>
                     </div>
                 </div>
+
+                <span style={{color: getColorByPriority(ticket.priority)}}>{ticket.priority}</span>
             </div>
         </div>
     )
