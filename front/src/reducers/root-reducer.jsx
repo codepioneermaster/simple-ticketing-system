@@ -1,10 +1,6 @@
-import {ADD_TICKET, LOAD_TICKETS, UPDATE_TICKET} from "../constants/action-types";
-import {CHANGE_STATUS} from "../constants/action-types";
+import {ADD_TICKET, LOAD_TICKETS, CHANGE_ASSIGNEE, CHANGE_STATUS} from "../constants/action-types";
 
-import {STATUS_NEW} from "../constants/status-types";
-import {STATUS_PROGRESS} from "../constants/status-types";
-import {STATUS_REVIEW} from "../constants/status-types";
-import {STATUS_DONE} from "../constants/status-types";
+import {STATUS_NEW, STATUS_PROGRESS, STATUS_REVIEW, STATUS_DONE} from "../constants/status-types";
 
 const initialState = {
     tickets: {
@@ -50,6 +46,13 @@ function rootReducer(state = initialState, action) {
             changeStatusState.tickets[action.payload.prevStatus] = Object.assign({}, changeStatusState.tickets[action.payload.prevStatus]);
 
             return changeStatusState;
+        case CHANGE_ASSIGNEE :
+            let changeAssigneeState = Object.assign({}, state);
+            changeAssigneeState.tickets[action.payload.ticket.status][action.payload.ticket.id].user = action.payload.assignee;
+
+            console.log(changeAssigneeState);
+
+            return changeAssigneeState;
         default:
             return state;
     }
