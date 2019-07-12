@@ -11,8 +11,7 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
-    "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --host 0.0.0.0 --disable-host-check",
