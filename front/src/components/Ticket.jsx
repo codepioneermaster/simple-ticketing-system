@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {STATUSES_LIST} from "../constants/status-types";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CHANGE_ASSIGNEE, CHANGE_STATUS} from "../constants/action-types";
 import {
     PRIORITY_NEW,
@@ -15,22 +15,8 @@ const Ticket = (ticket) => {
 
     const [status, setStatus] = useState(ticket.status);
     const [assignee, setAssignee] = useState(ticket.user ? ticket.user.id : '');
-    const [users, setUsers] = useState([]);
+    const users = useSelector(state => state.users);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        const fetchAvailableUsers = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/users', {
-                method: 'GET',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'}
-            });
-            return await fetchResult.json();
-        };
-
-        fetchAvailableUsers().then(result =>
-            setUsers(result.users)).catch(reason => console.log(reason.message));
-    }, []);
 
     const changeStatus = (status) => {
         const updateTicket = async (status, id) => {

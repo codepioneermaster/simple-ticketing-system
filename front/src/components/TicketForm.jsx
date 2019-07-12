@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {Link, Redirect} from "react-router-dom";
 
 import {STATUS_NEW, STATUSES_LIST} from "../constants/status-types";
@@ -15,7 +15,7 @@ const TicketForm = (ticket) => {
     const [priority, setPriority] = useState(PRIORITY_NEW);
     const [assignee, setAssignee] = useState('');
     const [status, setStatus] = useState(STATUS_NEW);
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(useSelector(state => state.users));
     const [id, setTicketId] = useState('');
 
     useEffect(() => {
@@ -27,20 +27,6 @@ const TicketForm = (ticket) => {
         }
         setStatus(ticket.status);
     }, [ticket]);
-
-    useEffect(() => {
-        const fetchAvailableUsers = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/users', {
-                method: 'GET',
-                mode: 'cors',
-                headers: {'Content-Type': 'application/json'}
-            });
-            return await fetchResult.json();
-        };
-
-        fetchAvailableUsers().then(result =>
-            setUsers(result.users)).catch(reason => console.log(reason.message));
-    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
