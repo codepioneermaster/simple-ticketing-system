@@ -101,52 +101,65 @@ const TicketForm = (ticket) => {
             </div>
             <div className="form-group">
                 <label htmlFor="description">Description</label>
-                <input
-                    type="text"
-                    className="form-control"
-                    id="description"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
+                <textarea className="form-control" value={description}
+                          onChange={(event) => setDescription(event.target.value)} id="description"/>
             </div>
 
             <div className="form-group">
-                <label htmlFor="priority">Priority</label>
-                <select value={priority} onChange={(event) => setPriority(event.target.value)} id="priority">
-                    {PRIORITIES_LIST.map((priority) => (
-                        <option key={priority} value={priority}>
-                            {priority}
-                        </option>
-                    ))}
-                </select>
+                <div className="row">
+                    <div className="col-md-1">
+                        <label htmlFor="priority">Priority:</label>
+                    </div>
+                    <div className="col-md-1">
+                        <select value={priority} onChange={(event) => setPriority(event.target.value)} id="priority">
+                            {PRIORITIES_LIST.map((priority) => (
+                                <option key={priority} value={priority}>
+                                    {priority}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div className="form-group">
-                <label htmlFor="assignee">Assignee</label>
-                <select value={assignee} onChange={(event) => setAssignee(event.target.value)} id="assignee">
-                    <option value="">
-                        Unassigned
-                    </option>
-                    {users.map((user) => (
-                        <option key={user.id} value={user.id}>
-                            {user.name}
-                        </option>
-                    ))}
-                </select>
+                <div className="row">
+                    <div className="col-md-1">
+                        <label htmlFor="assignee">Assignee:</label>
+                    </div>
+                    <div className="col-md-1">
+                        <select value={assignee} onChange={(event) => setAssignee(event.target.value)} id="assignee">
+                            <option value="">
+                                Unassigned
+                            </option>
+                            {users.map((user) => (
+                                <option key={user.id} value={user.id}>
+                                    {user.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
             </div>
 
             {status ?
                 <div className="form-group">
-                    <label htmlFor="status">Status</label>
-                    <select value={status} onChange={(event) =>
-                        setStatus(event.target.value)
-                    } id="status">
-                        {STATUSES_LIST.map((status) => (
-                            <option key={status} value={status}>
-                                {status}
-                            </option>
-                        ))}
-                    </select>
+                    <div className="row">
+                        <div className="col-md-1">
+                            <label htmlFor="status">Status:</label>
+                        </div>
+                        <div className="col-md-1">
+                            <select value={status} onChange={(event) =>
+                                setStatus(event.target.value)
+                            } id="status">
+                                {STATUSES_LIST.map((status) => (
+                                    <option key={status} value={status}>
+                                        {status}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
                 </div> : null}
 
 
