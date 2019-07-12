@@ -1,5 +1,5 @@
-import React from "react";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import React, {Fragment} from "react";
+import {Link} from "react-router-dom";
 
 import TicketList from "./TicketList";
 
@@ -9,7 +9,7 @@ import {STATUS_REVIEW} from "../constants/status-types";
 import {STATUS_DONE} from "../constants/status-types";
 
 const Board = () => (
-    <div>
+    <Fragment>
         <div className="row mb-4 mt-4">
             <div className="col-md-12 mb-4">
                 <Link to="/ticket" className="btn btn-primary btn-lg">Add Ticket</Link>
@@ -36,6 +36,6 @@ const Board = () => (
                 <TicketList status={STATUS_DONE}/>
             </div>
         </div>
-    </div>
+    </Fragment>
 );
 export default Board;

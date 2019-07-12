@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Ticket from "./Ticket";
 import {LOAD_TICKETS} from "../constants/action-types";
@@ -24,11 +24,11 @@ const TicketList = ({status}) => {
 
     const tickets = useSelector(state => state.tickets[status]);
 
-    return (<div>
+    return (<Fragment>
         {Object.values(tickets).map(ticket => {
             return (<Ticket key={ticket.id} {...ticket}/>)
         })}
-    </div>);
+    </Fragment>);
 };
 
 export default TicketList;
