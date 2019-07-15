@@ -16,8 +16,10 @@ const TicketForm = (ticket) => {
     const [priority, setPriority] = useState(PRIORITY_NEW);
     const [assignee, setAssignee] = useState('');
     const [status, setStatus] = useState(STATUS_NEW);
-    const [users, setUsers] = useState(useSelector(state => state.users));
+    const [users, setUsers] = useState([]);
     const [id, setTicketId] = useState('');
+
+    let stateUsers = useSelector(state => state.users);
 
     useEffect(() => {
         setSummary(ticket.summary);
@@ -27,7 +29,8 @@ const TicketForm = (ticket) => {
             ticket.user !== null && setAssignee(ticket.user.id);
         }
         setStatus(ticket.status);
-    }, [ticket]);
+        setUsers(stateUsers);
+    }, [ticket, stateUsers]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
