@@ -36,7 +36,7 @@ const TicketForm = (ticket) => {
             summary: summary,
             description: description,
             priority: priority,
-            status: PRIORITY_NEW,
+            status: status ? status : STATUS_NEW,
             assignee: assignee ? assignee : null
         };
 
