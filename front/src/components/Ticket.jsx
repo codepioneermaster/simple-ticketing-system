@@ -10,6 +10,7 @@ import {
     PRIORITY_HIGH,
     PRIORITY_BLOCKER
 } from "../constants/priority-types";
+import {BE_HOST} from "../constants/system-types";
 
 const Ticket = (ticket) => {
 
@@ -20,7 +21,7 @@ const Ticket = (ticket) => {
 
     const changeStatus = (status) => {
         const updateTicket = async (status, id) => {
-            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + id, {
+            const fetchResponse = await fetch(BE_HOST + '/tasks/' + id, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -42,7 +43,7 @@ const Ticket = (ticket) => {
 
     const changeAssignee = (assignee) => {
         const updateTicket = async (assignee, id) => {
-            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + id, {
+            const fetchResponse = await fetch(BE_HOST + '/tasks/' + id, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},

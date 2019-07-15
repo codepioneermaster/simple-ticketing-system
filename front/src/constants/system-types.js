@@ -1,0 +1,1 @@
+export const BE_HOST=process.env.BE_DOMAIN ? process.env.BE_DOMAIN : 'http://0.0.0.0:3000';

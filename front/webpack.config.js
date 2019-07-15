@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require('dotenv-webpack');
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
     template: './public/index.html',
     filename: './index.html',
@@ -33,9 +34,16 @@ module.exports = {
                     'file-loader'
                 ]
             },
+            {
+                test: /\.env$/i,
+                use: ['Dotenv'],
+            },
         ]
     },
-    plugins: [htmlWebpackPlugin, miniCssExtractPlugin],
+    plugins: [htmlWebpackPlugin, miniCssExtractPlugin, new Dotenv({
+        path: './.env',
+        safe: true
+    })],
     resolve: {
         extensions: ['.js', '.jsx'],
     },

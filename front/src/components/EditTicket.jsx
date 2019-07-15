@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import TicketForm from "./TicketForm";
+import {BE_HOST} from "../constants/system-types";
 
 const EditTicket = (props) => {
     const ticketId = props.match.params.id;
@@ -7,7 +8,7 @@ const EditTicket = (props) => {
 
     useEffect(() => {
         const fetchTicket = async (ticketId) => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/tasks/' + ticketId, {
+            const fetchResult = await fetch(BE_HOST + '/tasks/' + ticketId, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}

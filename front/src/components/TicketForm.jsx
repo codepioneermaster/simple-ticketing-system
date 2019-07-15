@@ -6,6 +6,7 @@ import {STATUS_NEW, STATUSES_LIST} from "../constants/status-types";
 import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
 
 import {ADD_TICKET} from "../constants/action-types";
+import {BE_HOST} from "../constants/system-types";
 
 const TicketForm = (ticket) => {
     const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const TicketForm = (ticket) => {
     const handleUpdate = (updatedTicket) => {
 
         const updateTicket = async (ticket) => {
-            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks/' + ticket.id, {
+            const fetchResponse = await fetch(BE_HOST +'/tasks/' + ticket.id, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -64,7 +65,7 @@ const TicketForm = (ticket) => {
 
     const handleCreate = (newTicket) => {
         const saveTicket = async (ticket) => {
-            const fetchResponse = await fetch('http://0.0.0.0:3000/tasks', {
+            const fetchResponse = await fetch(BE_HOST +'/tasks', {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},

@@ -2,6 +2,7 @@ import React, {Fragment, useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import Ticket from "./Ticket";
 import {LOAD_TICKETS} from "../constants/action-types";
+import {BE_HOST} from "../constants/system-types";
 
 const TicketList = ({status}) => {
     const [requestedTickets, setData] = useState({ tickets: [] });
@@ -9,7 +10,7 @@ const TicketList = ({status}) => {
 
     useEffect(() => {
         const fetchTickets = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/tasks' + '?status=' + status, {
+            const fetchResult = await fetch(BE_HOST +'/tasks' + '?status=' + status, {
                 method: 'GET',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}

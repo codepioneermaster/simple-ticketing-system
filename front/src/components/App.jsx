@@ -7,6 +7,7 @@ import Board from "./Board";
 import CreateTicket from "./CreateTicket";
 import {useDispatch} from "react-redux";
 import {LOAD_USERS} from "../constants/action-types";
+import {BE_HOST} from "../constants/system-types";
 
 const browserHistory = createBrowserHistory();
 
@@ -15,7 +16,7 @@ const App = () => {
 
     useEffect(() => {
         const fetchAvailableUsers = async () => {
-            const fetchResult = await fetch('http://0.0.0.0:3000/users', {
+            const fetchResult = await fetch(BE_HOST + '/users', {
                 method: 'GET',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'}
