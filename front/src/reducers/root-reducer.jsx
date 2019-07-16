@@ -12,6 +12,13 @@ const initialState = {
     users: []
 };
 
+/**
+ * Main reducer
+ *
+ * @param state
+ * @param action
+ * @returns {{tickets: {}, users: Array}|({} & {tickets: {}, users: Array} & {tickets: {[p: string]: *}})|({} & {tickets: {}, users: Array})}
+ */
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case ADD_TICKET :

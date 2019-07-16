@@ -4,10 +4,18 @@ import Ticket from "./Ticket";
 import {LOAD_TICKETS} from "../constants/action-types";
 import {BE_HOST} from "../constants/system-types";
 
+/**
+ * @param status
+ * @returns {*}
+ * @constructor
+ */
 const TicketList = ({status}) => {
     const [requestedTickets, setData] = useState({ tickets: [] });
     const dispatch = useDispatch();
 
+    /**
+     * Load tickets by status
+     */
     useEffect(() => {
         const fetchTickets = async () => {
             const fetchResult = await fetch(BE_HOST +'/tasks' + '?status=' + status, {

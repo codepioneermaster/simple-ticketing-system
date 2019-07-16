@@ -2,10 +2,18 @@ import React, {useEffect, useState} from "react";
 import TicketForm from "./TicketForm";
 import {BE_HOST} from "../constants/system-types";
 
+/**
+ * @param props
+ * @returns {*}
+ * @constructor
+ */
 const EditTicket = (props) => {
     const ticketId = props.match.params.id;
     const [requestedTicket, setTicket] = useState({});
 
+    /**
+     * Load ticket data by ticket id
+     */
     useEffect(() => {
         const fetchTicket = async (ticketId) => {
             const fetchResult = await fetch(BE_HOST + '/tasks/' + ticketId, {

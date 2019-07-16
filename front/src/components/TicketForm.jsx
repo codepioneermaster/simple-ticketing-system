@@ -9,7 +9,6 @@ import {ADD_TICKET} from "../constants/action-types";
 import {BE_HOST} from "../constants/system-types";
 
 /**
- *
  * @param ticket
  * @returns {*}
  * @constructor

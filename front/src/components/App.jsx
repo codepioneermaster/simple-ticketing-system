@@ -11,9 +11,16 @@ import {BE_HOST} from "../constants/system-types";
 
 const browserHistory = createBrowserHistory();
 
+/**
+ * @returns {*}
+ * @constructor
+ */
 const App = () => {
     const dispatch = useDispatch();
 
+    /**
+     * Load users
+     */
     useEffect(() => {
         const fetchAvailableUsers = async () => {
             const fetchResult = await fetch(BE_HOST + '/users', {

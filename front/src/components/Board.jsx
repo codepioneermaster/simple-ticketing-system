@@ -8,6 +8,10 @@ import {STATUS_PROGRESS} from "../constants/status-types";
 import {STATUS_REVIEW} from "../constants/status-types";
 import {STATUS_DONE} from "../constants/status-types";
 
+/**
+ * @returns {*}
+ * @constructor
+ */
 const Board = () => (
     <Fragment>
         <div className="row mb-4 mt-4">

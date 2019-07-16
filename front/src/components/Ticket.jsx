@@ -12,6 +12,11 @@ import {
 } from "../constants/priority-types";
 import {BE_HOST} from "../constants/system-types";
 
+/**
+ * @param ticket
+ * @returns {*}
+ * @constructor
+ */
 const Ticket = (ticket) => {
 
     const [status, setStatus] = useState(ticket.status);
@@ -19,6 +24,11 @@ const Ticket = (ticket) => {
     const users = useSelector(state => state.users);
     const dispatch = useDispatch();
 
+    /**
+     * Change status handler
+     *
+     * @param status
+     */
     const changeStatus = (status) => {
         const updateTicket = async (status, id) => {
             const fetchResponse = await fetch(BE_HOST + '/tasks/' + id, {
@@ -41,6 +51,11 @@ const Ticket = (ticket) => {
         }).catch(reason => console.log(reason.message));
     };
 
+    /**
+     * Reassign handler
+     *
+     * @param assignee
+     */
     const changeAssignee = (assignee) => {
         const updateTicket = async (assignee, id) => {
             const fetchResponse = await fetch(BE_HOST + '/tasks/' + id, {
@@ -62,6 +77,12 @@ const Ticket = (ticket) => {
         }).catch(reason => console.log(reason.message));
     };
 
+    /**
+     * Simple vocabulary with priority styles
+     *
+     * @param priority
+     * @returns {string}
+     */
     const getClassByPriority = (priority) => {
         switch (priority) {
             case PRIORITY_NEW :

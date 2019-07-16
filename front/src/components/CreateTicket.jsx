@@ -1,8 +1,11 @@
 import React from "react";
 import TicketForm from "./TicketForm";
 
+/**
+ * @returns {*}
+ * @constructor
+ */
 const CreateTicket = () => {
-
     return (
         <div className="row mt-4">
             <div className="col-md-12">
