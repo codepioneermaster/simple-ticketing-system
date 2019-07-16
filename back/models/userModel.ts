@@ -1,4 +1,13 @@
-import {Table, Column, PrimaryKey, AutoIncrement, Model, CreatedAt, UpdatedAt} from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  PrimaryKey,
+  AutoIncrement,
+  Model,
+  CreatedAt,
+  UpdatedAt,
+  AllowNull, NotEmpty
+} from 'sequelize-typescript';
 
 @Table({
   tableName: 'User'
@@ -10,6 +19,8 @@ export class UserModel extends Model<UserModel> {
   @Column
   id: number;
 
+  @AllowNull(false)
+  @NotEmpty(true)
   @Column
   name: string;
 

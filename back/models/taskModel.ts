@@ -1,4 +1,15 @@
-import {Table, Column, PrimaryKey, AutoIncrement, Model, CreatedAt, UpdatedAt, ForeignKey, BelongsTo} from 'sequelize-typescript';
+import {
+    Table,
+    Column,
+    PrimaryKey,
+    AutoIncrement,
+    Model,
+    CreatedAt,
+    UpdatedAt,
+    ForeignKey,
+    BelongsTo,
+    NotEmpty, Default, AllowNull
+} from 'sequelize-typescript';
 import {Priorities} from "./enums/priorities";
 import {Statuses} from "./enums/statuses";
 import {UserModel} from "./userModel";
@@ -13,15 +24,21 @@ export class TaskModel extends Model<TaskModel> {
     @Column
     id: number;
 
+    @AllowNull(false)
     @Column
     summary: string;
 
     @Column
     description: string;
 
+    @AllowNull(false)
+    @NotEmpty(true)
+    @Default(Priorities.New)
     @Column
     priority: Priorities;
 
+    @AllowNull(false)
+    @Default(Statuses.New)
     @Column
     status: Statuses;
 
