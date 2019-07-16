@@ -20,7 +20,7 @@ export class UserModel extends Model<UserModel> {
   id: number;
 
   @AllowNull(false)
-  @NotEmpty(true)
+  @NotEmpty({msg: 'User name cannot be empty'})
   @Column
   name: string;
 

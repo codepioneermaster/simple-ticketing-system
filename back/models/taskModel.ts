@@ -25,6 +25,7 @@ export class TaskModel extends Model<TaskModel> {
     id: number;
 
     @AllowNull(false)
+    @NotEmpty({msg: 'Task summary cannot be empty'})
     @Column
     summary: string;
 
@@ -32,7 +33,6 @@ export class TaskModel extends Model<TaskModel> {
     description: string;
 
     @AllowNull(false)
-    @NotEmpty(true)
     @Default(Priorities.New)
     @Column
     priority: Priorities;
