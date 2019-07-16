@@ -8,6 +8,12 @@ import {PRIORITY_NEW, PRIORITIES_LIST} from "../constants/priority-types";
 import {ADD_TICKET} from "../constants/action-types";
 import {BE_HOST} from "../constants/system-types";
 
+/**
+ *
+ * @param ticket
+ * @returns {*}
+ * @constructor
+ */
 const TicketForm = (ticket) => {
     const dispatch = useDispatch();
 
@@ -18,9 +24,13 @@ const TicketForm = (ticket) => {
     const [status, setStatus] = useState(STATUS_NEW);
     const [users, setUsers] = useState([]);
     const [id, setTicketId] = useState('');
+    const [validation, setValidationErrors] = useState('');
 
     let stateUsers = useSelector(state => state.users);
 
+    /**
+     * Setting form values for editing
+     */
     useEffect(() => {
         setSummary(ticket.summary);
         setDescription(ticket.description);
@@ -32,6 +42,11 @@ const TicketForm = (ticket) => {
         setUsers(stateUsers);
     }, [ticket, stateUsers]);
 
+    /**
+     * Submit handler
+     *
+     * @param event
+     */
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -43,13 +58,37 @@ const TicketForm = (ticket) => {
             assignee: assignee ? assignee : null
         };
 
+        if (!validateInput(newTicket)) {
+            return;
+        }
+
         ticket.id ? handleUpdate({...newTicket, id: ticket.id}) : handleCreate(newTicket);
     };
 
+    /**
+     * Basic validation
+     *
+     * @param input
+     * @returns {boolean}
+     */
+    const validateInput = (input) => {
+        if (input.summary) {
+            return true;
+        }
+
+        setValidationErrors('Summary cannot be empty');
+        return false;
+    };
+
+    /**
+     * Handle update
+     *
+     * @param updatedTicket
+     */
     const handleUpdate = (updatedTicket) => {
 
         const updateTicket = async (ticket) => {
-            const fetchResponse = await fetch(BE_HOST +'/tasks/' + ticket.id, {
+            const fetchResponse = await fetch(BE_HOST + '/tasks/' + ticket.id, {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -66,9 +105,14 @@ const TicketForm = (ticket) => {
             .catch(reason => console.log(reason.message));
     };
 
+    /**
+     * Handle create
+     *
+     * @param newTicket
+     */
     const handleCreate = (newTicket) => {
         const saveTicket = async (ticket) => {
-            const fetchResponse = await fetch(BE_HOST +'/tasks', {
+            const fetchResponse = await fetch(BE_HOST + '/tasks', {
                 method: 'POST',
                 mode: 'cors',
                 headers: {'Content-Type': 'application/json'},
@@ -166,11 +210,23 @@ const TicketForm = (ticket) => {
                     </div>
                 </div> : null}
 
+            <div className="form-group">
+                <div className="row">
 
-            <button type="submit" className="btn btn-success btn-lg">
-                Save
-            </button>
-            <Link to="/" className="btn btn-secondary btn-lg ml-4">Cancel</Link>
+                    <button type="submit" className="btn btn-success btn-lg">
+                        Save
+                    </button>
+                    <Link to="/" className="btn btn-secondary btn-lg ml-4">Cancel</Link>
+                </div>
+            </div>
+
+            {validation ? <div className="form-group">
+                <div className="row">
+                    <div className="alert alert-danger" role="alert">
+                        {validation}
+                    </div>
+                </div>
+            </div> : null}
         </form>
     )
 };
