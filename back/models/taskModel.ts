@@ -35,8 +35,6 @@ export class TaskModel extends Model<TaskModel> {
     @Column
     priority: Priorities;
 
-    @AllowNull(false)
-    @Default(Statuses.New)
     @Column
     status: Statuses;
 
